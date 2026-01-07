@@ -42,21 +42,16 @@ export default function Header() {
             h-16 w-full flex items-center justify-between px-6
             rounded-2xl
             transition-all duration-300
-            ${hasScrolled
-              ? "bg-emerald-900/75 shadow-2xl border border-white/10 backdrop-blur-2xl backdrop-saturate-150"
-              : "bg-transparent shadow-none border-transparent backdrop-blur-0"
+            ${
+              hasScrolled
+                ? "bg-emerald-900/75 shadow-2xl border border-white/10 backdrop-blur-2xl backdrop-saturate-150"
+                : "bg-transparent shadow-none border-transparent backdrop-blur-0"
             }
           `}
         >
           {/* LOGO */}
           <Link href="/" className="flex items-center gap-2" style={{ fontFamily: "var(--font-heading)" }}>
-            <Image
-              src="/logos/logo.png"
-              alt="Logo"
-              width={140}
-              height={45}
-              className="h-8 w-auto"
-            />
+            <Image src="/logos/logo.png" alt="Ecoshift Logo" width={140} height={45} className="h-8 w-auto" />
           </Link>
 
           {/* DESKTOP NAV */}
@@ -69,9 +64,10 @@ export default function Header() {
                   href={item.href}
                   className={`
                     text-sm uppercase transition
-                    ${active
-                      ? "text-emerald-300 drop-shadow-[0_0_10px_rgba(16,185,129,0.9)]"
-                      : "text-gray-200 hover:text-white"
+                    ${
+                      active
+                        ? "text-emerald-300 drop-shadow-[0_0_10px_rgba(16,185,129,0.9)]"
+                        : "text-gray-200 hover:text-white"
                     }
                   `}
                 >
@@ -82,14 +78,15 @@ export default function Header() {
           </nav>
 
           {/* DESKTOP CTA */}
-          <div className="hidden md:flex">
+          <div className="hidden md:flex items-center gap-4">
             <Link href="/get-started">
               <button
                 className={`
                   px-6 py-2 text-white rounded-xl transition uppercase
-                  ${hasScrolled
-                    ? "bg-white/10 border border-white/10 shadow-xl backdrop-blur-xl backdrop-saturate-150 hover:bg-white/20 hover:shadow-2xl"
-                    : "bg-transparent border-transparent shadow-none"
+                  ${
+                    hasScrolled
+                      ? "bg-white/10 border border-white/10 shadow-xl backdrop-blur-xl backdrop-saturate-150 hover:bg-white/20 hover:shadow-2xl"
+                      : "bg-transparent border-transparent shadow-none"
                   }
                 `}
                 style={{ fontFamily: "var(--font-heading)" }}
@@ -100,12 +97,11 @@ export default function Header() {
           </div>
 
           {/* MOBILE MENU TOGGLE */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-white"
-          >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+          <div className="md:hidden flex items-center gap-2">
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white" aria-label="Toggle menu">
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
         </div>
 
         {/* MOBILE MENU */}
@@ -132,9 +128,10 @@ export default function Header() {
                     onClick={() => setIsMenuOpen(false)}
                     className={`
                       text-base uppercase transition
-                      ${active
-                        ? "text-emerald-300 drop-shadow-[0_0_12px_rgba(16,185,129,0.9)]"
-                        : "text-gray-200 hover:text-white"
+                      ${
+                        active
+                          ? "text-emerald-300 drop-shadow-[0_0_12px_rgba(16,185,129,0.9)]"
+                          : "text-gray-200 hover:text-white"
                       }
                     `}
                   >

@@ -1,15 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 :root {
   /* Ecoshift Brand Colors */
   --eco-green: oklch(0.45 0.15 142);
   --eco-green-light: oklch(0.65 0.12 145);
   --eco-green-dark: oklch(0.35 0.12 140);
 
-  /* Semantic Tokens */
+  /* Semantic Tokens - Light Mode Only */
   --background: oklch(0.98 0.01 200);
   --foreground: oklch(0.15 0.02 200);
   --card: oklch(1 0 0);
@@ -43,43 +41,28 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-}
 
-.dark {
-  --eco-green: oklch(0.6 0.18 142);
-  --eco-green-light: oklch(0.75 0.15 145);
-  --eco-green-dark: oklch(0.4 0.14 140);
+  /* Typography and spacing tokens */
+  --font-heading: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono", monospace;
 
-  --background: oklch(0.12 0.01 200);
-  --foreground: oklch(0.95 0.01 200);
-  --card: oklch(0.15 0.01 200);
-  --card-foreground: oklch(0.95 0.01 200);
-  --popover: oklch(0.15 0.01 200);
-  --popover-foreground: oklch(0.95 0.01 200);
-  --primary: oklch(0.6 0.18 142);
-  --primary-foreground: oklch(0.12 0.01 200);
-  --secondary: oklch(0.25 0.01 200);
-  --secondary-foreground: oklch(0.95 0.01 200);
-  --muted: oklch(0.35 0.01 200);
-  --muted-foreground: oklch(0.65 0.02 200);
-  --accent: oklch(0.6 0.18 142);
-  --accent-foreground: oklch(0.12 0.01 200);
-  --border: oklch(0.25 0.01 200);
-  --input: oklch(0.2 0.01 200);
-  --ring: oklch(0.6 0.18 142);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  /* Spacing scale */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  --spacing-4xl: 6rem;
+
+  /* Shadow scale */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 @theme inline {
@@ -132,5 +115,79 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Added comprehensive typography hierarchy with proper line heights and spacing */
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-balance;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold leading-snug text-balance;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl font-bold leading-relaxed;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl font-semibold leading-relaxed;
+  }
+
+  h5 {
+    @apply text-lg md:text-xl font-semibold leading-relaxed;
+  }
+
+  h6 {
+    @apply text-base md:text-lg font-semibold leading-relaxed;
+  }
+
+  p {
+    @apply leading-relaxed text-pretty;
+  }
+
+  /* Improved link styling for accessibility and consistency */
+  a {
+    @apply transition-colors duration-300;
+  }
+
+  /* Enhanced focus states for keyboard navigation */
+  button:focus-visible,
+  a:focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+
+  /* Better code block styling */
+  code {
+    @apply font-mono text-sm bg-muted px-2 py-1 rounded-md;
+  }
+
+  pre {
+    @apply bg-muted p-4 rounded-lg overflow-x-auto;
+  }
+}
+
+/* Added smooth scrolling behavior and reduced motion preferences */
+@supports (scroll-behavior: smooth) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Enhanced print styles for accessibility */
+@media print {
+  body {
+    @apply bg-white text-black;
+  }
+  a {
+    @apply underline;
   }
 }
