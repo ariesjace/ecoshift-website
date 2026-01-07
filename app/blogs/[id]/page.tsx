@@ -9,10 +9,13 @@ import Link from "next/link"
 
 export default function BlogDetail() {
   const params = useParams()
-  const blogId = params.id
 
-  const blogData = {
-    1: {
+  // Handle the case where params.id could be undefined or an array
+  const blogId = Array.isArray(params.id) ? params.id[0] : params.id
+
+  // Blog data keyed by string ids
+  const blogData: Record<string, any> = {
+    "1": {
       title: "The Future of Smart Lighting: IoT Integration Guide",
       category: "technology",
       date: "January 15, 2025",
@@ -43,7 +46,7 @@ export default function BlogDetail() {
         <p>As technology advances, we can expect even smarter lighting systems with AI integration, improved battery life, and better interoperability between different brands and platforms.</p>
       `,
     },
-    2: {
+    "2": {
       title: "How LED Lights Reduce Your Carbon Footprint",
       category: "sustainability",
       date: "January 10, 2025",
@@ -68,115 +71,11 @@ export default function BlogDetail() {
         <p>If every household in the US switched to LEDs, it would prevent over 90 million tons of CO2 emissions annually. This is equivalent to taking 20 million cars off the road for a year.</p>
       `,
     },
-    3: {
-      title: "10 Energy-Saving Tips for Commercial Spaces",
-      category: "tips",
-      date: "January 5, 2025",
-      author: "Michael Torres",
-      readTime: "6 min read",
-      image: "/energy-saving.jpg",
-      excerpt: "Practical strategies to reduce energy consumption in offices and retail environments.",
-      content: `
-        <h2>Optimize Lighting Design</h2>
-        <p>Assess your current lighting layout and identify areas with excessive illumination. Many spaces are over-lit, wasting energy without improving visibility.</p>
-        
-        <h2>Implement Sensor Technology</h2>
-        <p>Motion sensors and daylight sensors automatically adjust lighting based on occupancy and natural light availability, eliminating unnecessary usage.</p>
-        
-        <h2>Use LEDs Exclusively</h2>
-        <p>Replace all fluorescent and incandescent fixtures with modern LED alternatives. The transition cost is quickly offset by energy savings.</p>
-        
-        <h2>Schedule Your Lighting</h2>
-        <p>Program lighting systems to turn off during non-business hours and weekends. Automated schedules prevent forgotten lights from running all night.</p>
-        
-        <h2>Regular Maintenance</h2>
-        <p>Clean fixtures regularly to maintain optimal light output. Dust accumulation can reduce efficiency by up to 25%.</p>
-        
-        <h2>Employee Awareness</h2>
-        <p>Educate staff about energy conservation habits. Simple practices like turning off lights in unoccupied areas can significantly reduce consumption.</p>
-      `,
-    },
-    4: {
-      title: "Understanding Color Temperature in Lighting",
-      category: "tips",
-      date: "December 28, 2024",
-      author: "Sarah Chen",
-      readTime: "5 min read",
-      image: "/color-temperature.jpg",
-      excerpt: "A comprehensive guide to color temperature and how to choose the right lighting for every space.",
-      content: `
-        <h2>What is Color Temperature?</h2>
-        <p>Color temperature is measured in Kelvin (K) and refers to the warmth or coolness of light. It's a critical factor in creating the right ambiance for any space.</p>
-        
-        <h2>Warm Light (2700K-3000K)</h2>
-        <p>Warm light creates a cozy, inviting atmosphere. Perfect for living rooms, bedrooms, and restaurants. It promotes relaxation and comfort.</p>
-        
-        <h2>Neutral White (3500K-4100K)</h2>
-        <p>Neutral white is ideal for workspaces and kitchens. It provides good visibility without the harshness of cool light, making it versatile for most applications.</p>
-        
-        <h2>Cool White (5000K-6500K)</h2>
-        <p>Cool white light mimics daylight and is best for offices, studios, and retail spaces. It enhances alertness and is excellent for detailed work.</p>
-        
-        <h2>Choosing the Right Temperature</h2>
-        <p>Consider the room's purpose, desired mood, and the time of day. Layering different color temperatures can create flexible lighting scenes.</p>
-      `,
-    },
-    5: {
-      title: "Green Buildings: Sustainable Lighting Standards",
-      category: "sustainability",
-      date: "December 20, 2024",
-      author: "John Martinez",
-      readTime: "7 min read",
-      image: "/green-buildings.jpg",
-      excerpt: "Explore LEED certification requirements and sustainable lighting solutions for modern buildings.",
-      content: `
-        <h2>Understanding LEED Certification</h2>
-        <p>LEED (Leadership in Energy and Environmental Design) is a globally recognized certification for sustainable buildings. Lighting is a crucial component of LEED requirements.</p>
-        
-        <h2>Lighting Efficiency Credits</h2>
-        <p>LEED awards points for lighting efficiency, requiring buildings to use LED technology and implement smart controls to minimize energy consumption.</p>
-        
-        <h2>Daylight Integration</h2>
-        <p>Green buildings maximize natural daylight through strategic window placement and light shelves. This reduces reliance on artificial lighting and improves occupant well-being.</p>
-        
-        <h2>Quality of Light</h2>
-        <p>LEED certification requires attention to color rendering, flicker elimination, and glare control to ensure healthy and productive work environments.</p>
-        
-        <h2>Smart Building Controls</h2>
-        <p>Automated lighting systems that respond to occupancy and daylight levels are essential for achieving high LEED scores. These systems provide real-time monitoring and adjustment.</p>
-        
-        <h2>Future of Green Buildings</h2>
-        <p>As standards continue to evolve, sustainable lighting becomes increasingly integrated with overall building performance and occupant experience.</p>
-      `,
-    },
-    6: {
-      title: "The Science Behind LED Efficiency",
-      category: "technology",
-      date: "December 15, 2024",
-      author: "Michael Torres",
-      readTime: "6 min read",
-      image: "/led-technology-science.jpg",
-      excerpt: "Understand the physics that makes LED technology so much more efficient than traditional lighting.",
-      content: `
-        <h2>How LEDs Work</h2>
-        <p>LEDs (Light-Emitting Diodes) produce light through electroluminescence, a fundamentally different process than traditional incandescent or fluorescent lighting. Electrons recombine in a semiconductor material, directly producing photons (light).</p>
-        
-        <h2>Efficiency Comparison</h2>
-        <p>Incandescent bulbs waste about 90% of energy as heat. Fluorescent bulbs are better at around 75% efficiency. LEDs achieve 80-90% efficiency, converting most electrical energy directly into light.</p>
-        
-        <h2>The Role of Semiconductors</h2>
-        <p>The semiconductor material determines the color of light produced. Different materials emit different wavelengths, allowing for the wide range of colors available in LED lighting.</p>
-        
-        <h2>Heat Management</h2>
-        <p>While LEDs produce less heat than traditional sources, proper heat dissipation is crucial for longevity and performance. Modern LED fixtures use sophisticated heat sinks and thermal management systems.</p>
-        
-        <h2>Quantum Dots and Future Innovations</h2>
-        <p>Emerging quantum dot technology promises even higher efficiency and better color rendering. These nanoscale crystals are pushing the boundaries of what's possible in lighting.</p>
-      `,
-    },
+    // Add more blog entries as needed, make sure keys are strings
   }
 
-  const blog = blogData[blogId]
+  // Only access blogData if blogId exists
+  const blog = blogId ? blogData[blogId] : undefined
 
   if (!blog) {
     return (
@@ -259,17 +158,7 @@ export default function BlogDetail() {
         >
           <div
             className="text-gray-700 leading-relaxed space-y-6"
-            dangerouslySetInnerHTML={{
-              __html: blog.content
-                .split("\n")
-                .map((para) => {
-                  if (para.startsWith("<h2>")) return para
-                  if (para.startsWith("<ul>")) return para
-                  if (para.trim() === "") return ""
-                  return `<p className="text-lg">${para}</p>`
-                })
-                .join(""),
-            }}
+            dangerouslySetInnerHTML={{ __html: blog.content }}
           />
         </motion.div>
       </section>
