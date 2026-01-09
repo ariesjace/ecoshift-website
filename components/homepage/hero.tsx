@@ -3,12 +3,13 @@
 import { useState } from "react"
 import Marquee from "@/components/homepage/marquee"
 import { HeroMarquee } from "./hero-marquee"
-import { motion } from "framer-motion"
+import { motion, Variants } from "framer-motion"
 
 export default function Hero() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
-  const containerVariants = {
+  // TypeScript-safe variants
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -19,30 +20,60 @@ export default function Hero() {
     },
   }
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
+      transition: {
+        duration: 0.8,
+        ease: [0.25, 0.46, 0.45, 0.94], // TS-safe cubic-bezier array
+      },
+    },
+  }
+
+  const floatVariants: Variants = {
+    animate: {
+      y: [0, 40, 0],
+      x: [0, 20, 0],
+      transition: {
+        duration: 8,
+        repeat: Infinity,
+        ease: [0.42, 0, 0.58, 1], // ease-in-out cubic-bezier
+      },
+    },
+  }
+
+  const floatVariants2: Variants = {
+    animate: {
+      y: [0, -40, 0],
+      x: [0, -20, 0],
+      transition: {
+        duration: 10,
+        repeat: Infinity,
+        ease: [0.42, 0, 0.58, 1],
+        delay: 1,
+      },
     },
   }
 
   return (
     <section className="pt-16 pb-12 sm:pt-24 sm:pb-16 md:pt-32 md:pb-20 lg:pt-40 lg:pb-24 bg-gradient-to-br from-eco-green via-eco-green-light to-eco-green/50 relative overflow-hidden">
+      {/* Floating gradient circles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-4 right-4 sm:top-10 sm:right-10 md:top-10 md:right-20 w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 bg-white/5 rounded-full blur-3xl"
-          animate={{ y: [0, 40, 0], x: [0, 20, 0] }}
-          transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+          variants={floatVariants}
+          animate="animate"
         />
         <motion.div
           className="absolute bottom-4 left-4 sm:bottom-10 sm:left-10 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-white/5 rounded-full blur-3xl"
-          animate={{ y: [0, -40, 0], x: [0, -20, 0] }}
-          transition={{ duration: 10, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1 }}
+          variants={floatVariants2}
+          animate="animate"
         />
       </div>
 
+      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">
         <motion.div
           className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center"
