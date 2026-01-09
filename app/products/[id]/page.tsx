@@ -9,7 +9,8 @@ import Link from "next/link"
 
 export default function ProductDetail() {
   const params = useParams()
-  const productId = params.id
+  const productId = Array.isArray(params.id) ? params.id[0] : params.id
+  const productKey = productId ? Number(productId) : undefined
 
   const productData = {
     1: {
@@ -158,7 +159,7 @@ export default function ProductDetail() {
     },
   }
 
-  const product = productData[productId]
+  const product = productKey ? productData[productKey as keyof typeof productData] : undefined
 
   if (!product) {
     return (
