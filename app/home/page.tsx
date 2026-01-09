@@ -30,9 +30,9 @@ export default function Home() {
       <Hero />
       <FeaturesSection />
       <StatsSection />
+      <CTABlock />
       <ProductCarousel />
       <TestimonialsSection />
-      <CTABlock />
       <Footer />
       <ScrollToTop />
     </main>
